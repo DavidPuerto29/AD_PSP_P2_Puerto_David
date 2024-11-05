@@ -20,7 +20,7 @@ import java.util.Map;
  * @version 1.0
  */
 
-public class GestionaFicheros implements Serializable{
+public class GestionaFicherosHilos implements Serializable{
     /**
      *Ya que en los métodos de escritura y lectura de fichero binario no se pide archivo File
      *Se declara en la clase una variable estática File con la ruta definida del bin.

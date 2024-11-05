@@ -1,6 +1,7 @@
 package interfaz;
 import biblioteca.Autoria;
 import biblioteca.Libro;
+import ficheros.GestionaFicherosHilos;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +12,7 @@ import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
-import static ficheros.GestionaFicheros.*;
+import static ficheros.GestionaFicherosHilos.*;
 
 /**
  * Clase que representa a un programa de gestión de biblioteca gestionando los autores y los libros
@@ -316,7 +317,7 @@ public class Biblioteca implements Serializable {
      * exista informa al usuario de que existe y si desea sobreescribirlo si el usuario elige que no
      * desea sobreescribirlo se le llevara al menu principal.
      *
-     *@see ficheros.GestionaFicheros#exportarFichero(File, HashMap, HashMap) Gestiona la salida de los datos.
+     *@see GestionaFicherosHilos#exportarFichero(File, HashMap, HashMap) Gestiona la salida de los datos.
      */
     private static void exportarAlFichero() {
         Scanner sc = new Scanner(System.in);
@@ -353,7 +354,7 @@ public class Biblioteca implements Serializable {
      * existir se llamará al método importarFicheros de la clase GestionaFicheros y se informará al usuario de
      * que la exportación ha sido correcta.
      *
-     * @see ficheros.GestionaFicheros#importarFicheros(File, HashMap, HashMap) Gestiona la entrada de los datos.
+     * @see GestionaFicherosHilos#importarFicheros(File, HashMap, HashMap) Gestiona la entrada de los datos.
      */
     private static void importarDeFichero(){
         Scanner sc = new Scanner(System.in);
