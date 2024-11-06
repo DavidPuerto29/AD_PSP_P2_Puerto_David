@@ -50,7 +50,8 @@ public class Biblioteca implements Serializable {
         boolean bucle = true;
         System.out.println("Bienvenido al gestor de biblioteca");
         try {
-            leerBin(Biblioteca.autores, Biblioteca.libros); //En caso de que se encuentre, se lee el fichero binario para cargar datos de usos posteriores del programa.
+            //En caso de que se encuentre, se lee el fichero binario para cargar datos de usos posteriores del programa.
+            leerBin(Biblioteca.autores, Biblioteca.libros);
         }catch ( FileNotFoundException e) {
             System.out.println("Veo que esta es tu primera vez \n¿Por donde quieres empezar?");
         } catch (IOException e) {
