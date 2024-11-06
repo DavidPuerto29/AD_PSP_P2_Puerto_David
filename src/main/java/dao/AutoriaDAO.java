@@ -89,8 +89,14 @@ public class AutoriaDAO {
         return instancias;
     }
 
-    public static int crearActualizarAutorias(){
-
+    /*  Hacer pero sera algo tipo si no exite creas si existe actualizas pero a ver como coño ves desde la sql si esta la instancia mientras recorres el bucle
+    public static int crearActualizarAutorias(HashMap <Integer, Autoria> autores){  //TEST
+        int id;
+        for(Map.Entry<Integer, Autoria> hm : autores.entrySet()){
+            id = hm.getKey();
+            instancias = leerAutoria(id);
+        }
+        return instancias;
     }
-
+    */
 }
