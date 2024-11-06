@@ -2,7 +2,6 @@ package ficheros;
 
 import biblioteca.Autoria;
 import biblioteca.Libro;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +34,8 @@ public class EscritorTexto extends Thread{
         Autoria a = null;
         Libro libroCopia = null;
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f)));
-        pw.println("***AUT***");             //Escritura de autores en el fichero
+        //Escritura de autores en el fichero
+        pw.println("***AUT***");
         for (int i = 1; i <= autores.size(); ++i) {
             a = autores.get(i);
             System.out.println("a");
@@ -43,7 +43,8 @@ public class EscritorTexto extends Thread{
             pw.println(a.getNombre());
             pw.println(a.getApellido());
         }
-        pw.println("***LIB***");            //Escritura de libros en el fichero
+        //Escritura de libros en el fichero
+        pw.println("***LIB***");
         for (Map.Entry<String, Libro> l: libros.entrySet()) {
             libroCopia = l.getValue();
             pw.println(libroCopia.getIsbn());
