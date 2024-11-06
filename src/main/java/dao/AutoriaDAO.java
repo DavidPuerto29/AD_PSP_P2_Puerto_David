@@ -29,7 +29,7 @@ public class AutoriaDAO {
         return instancias;
     }
 
-    public static int leerAutoria(int id){    //testear
+    public static int leerAutoria(int id){    //testear ns paq se usa
         Autoria a1 = null;
         String sql = "select * from autorias where id = ?";
         instancias = 0;
@@ -53,7 +53,7 @@ public class AutoriaDAO {
         return instancias;
     }
 
-    public static int actualizarAutoria(Autoria autor){    //TEST
+    public static int actualizarAutoria(Autoria autor){    //FUNCIONA
         String sql = "update autorias set nombre = ?, apellido = ? where id = ?";
 
         try(Connection con = Conexion.conectar()){
@@ -68,11 +68,12 @@ public class AutoriaDAO {
         return instancias;
     }
 
-    public static int eliminarAutoria(int id){ //TEST
+    public static int eliminarAutoria(int id){ //FUNCIONA
         String sql = "delete from autorias where id = ?";
 
         try(Connection con = Conexion.conectar()){
             PreparedStatement p = con.prepareStatement(sql);
+            p.setInt(1, id );
             instancias = p.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
