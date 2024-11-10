@@ -111,13 +111,26 @@ public class LibroDao {
         return libros;
     }
 
-    public static int crearActualizarLibros(HashMap<String, Libro> libros){  //TEST
+    public static int crearActualizarLibros(HashMap<String, Libro> libros){  //Funciona
         String sql = "insert into libros" +
                 "(isbn,titulo,idautoria)" +
                 "values(?,?,?)" +
                 "on duplicate key update " +
-                "titulo = values(titiulo)," +
-                "apellido = values(apellido)";
-        return 1;
+                "titulo = values(titulo)," +
+                "idautoria = values(idautoria)";
+
+        for(Map.Entry<String, Libro> hmLibros : libros.entrySet()){
+            Libro lPrefab = hmLibros.getValue();
+        try(Connection con = Conexion.conectar()){
+            PreparedStatement p = con.prepareStatement(sql);
+            p.setString(1, lPrefab.getIsbn());
+            p.setString(2, lPrefab.getTitulo());
+            p.setInt(3, lPrefab.getAutoria().getId());
+                instancias = p.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        }
+        return instancias;
     }
 }
