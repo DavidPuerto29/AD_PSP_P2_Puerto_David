@@ -35,5 +35,6 @@ public class LectorBinario extends Thread{
         autores.putAll(autoresAUX);
         HashMap<String, Libro> librosAux = (HashMap<String, Libro>) ois.readObject();
         libros.putAll(librosAux);
+        ois.close();
     }
 }
