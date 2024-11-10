@@ -35,6 +35,7 @@ public class Biblioteca implements Serializable {
      */
     private static HashMap <String, Libro> libros = new HashMap<>();
     private static HashMap <Integer, Autoria> autores = new HashMap<>();
+    private static int instancias = -1;
 
     /**
      * En el método main primero se intenta leer el fichero binario para importar datos
@@ -51,6 +52,7 @@ public class Biblioteca implements Serializable {
      */
     public static void main(String[] args) {    //Gestionar excepciones
         boolean bucle = true;
+
         System.out.println("Bienvenido al gestor de biblioteca");
         try {
             //En caso de que se encuentre, se lee el fichero binario para cargar datos de usos posteriores del programa.
@@ -69,6 +71,9 @@ public class Biblioteca implements Serializable {
             System.out.println("La clase deseada no ha sido encontrada.");
         }
         while (bucle) {
+            //test
+            System.out.println("a"+autores);
+            System.out.println("a"+libros);
                 System.out.println("""
                              ╔════════════════════|Menu Biblioteca|══════════════════════╗  \r
                         	 ║	               1 Crear autores		                     ║\r
@@ -175,8 +180,8 @@ public class Biblioteca implements Serializable {
                         if((comprobarString(nombre) && comprobarString(apellido))) {
                             autores.put(id,new Autoria(id,nombre,apellido));
                                     //Insertamos el nuevo autor en la base de datos.
-                                    insertarAutoria(autores.get(id));
-                                        System.out.println("Autor añadido correctamente.");
+                                    instancias = insertarAutoria(autores.get(id));
+                                        System.out.println("Autor añadido correctamente, filas sql afectadas: "+instancias);
                         }else{
                             System.out.println("Por favor, introduzca un nombre o apellido sin caracteres numéricos.");
                         }
@@ -234,8 +239,8 @@ public class Biblioteca implements Serializable {
             if (autores.containsKey(idAutor)) {
                 libros.put(isbn, new Libro(isbn, titulo, autores.get(idAutor)));
                     //Insertamos el nuevo libro en la base de datos.
-                    insertarLibro(libros.get(isbn));
-                        System.out.println("Libro añadido correctamente.");
+                    instancias = insertarLibro(libros.get(isbn));
+                        System.out.println("Libro añadido correctamente, filas sql afectadas: "+instancias);
             } else if (idAutor != null) {
                 //En caso de que id sea null se informa al usuario de que el autor no existe.
                 System.out.println("El id de autor introducido no corresponde a ningún autor registrado.");
@@ -292,8 +297,8 @@ public class Biblioteca implements Serializable {
             if (libros.containsKey(isbn)) {
                 libros.remove(isbn);
                     //Eliminamos el libro de la base de datos.
-                    eliminarLibro(isbn);
-                        System.out.println("Libro eliminado correctamente.");
+                    instancias = eliminarLibro(isbn);
+                        System.out.println("Libro eliminado correctamente, filas sql afectadas: "+instancias);
                             break;
             } else {
                 boolean menu2 = true;

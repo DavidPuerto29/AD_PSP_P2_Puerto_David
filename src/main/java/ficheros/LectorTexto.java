@@ -47,5 +47,6 @@ public class LectorTexto extends Thread{
             var = autores.get(Integer.valueOf(id));
             libros.put(nombre,(new Libro(nombre,apellido,var)));
         }
+        br.close();
     }
 }
