@@ -81,23 +81,46 @@ public class AutoriaDAO {
         return instancias;
     }
 
-    public static int leerTodasAutorias(HashMap <Integer, Autoria> autores){//test
-        int id;
-        for(Map.Entry<Integer, Autoria> hm : autores.entrySet()){
-            id = hm.getKey();
-            instancias = leerAutoria(id);
+    public static HashMap<Integer, Autoria> leerTodasAutorias(){ //Test
+        HashMap<Integer, Autoria> autorias = new HashMap<>();
+        String sql = "select * from autorias";
+        try(Connection con = Conexion.conectar()){
+            PreparedStatement p = con.prepareStatement(sql);
+            ResultSet rs = p.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String nombre= rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                Autoria autorLibro = new Autoria(id, nombre, apellido);
+                autorias.put(id,autorLibro);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return autorias;
+    }
+
+    public static int crearActualizarAutorias(HashMap <Integer, Autoria> autores){  //Funciona
+        String sql = "insert into autorias " +
+                     "(id, nombre, apellido)" +
+                     "values (?,?,?)" +
+                     "on duplicate key update " +
+                     "nombre = values(nombre)," +
+                     "apellido = values(apellido)";
+
+        for(Map.Entry<Integer, Autoria> hmAutores : autores.entrySet()){
+            Autoria aPrefab = hmAutores.getValue();
+        try(Connection con = Conexion.conectar()){
+            PreparedStatement p = con.prepareStatement(sql);
+            p.setInt(1, aPrefab.getId());
+            p.setString(2, aPrefab.getNombre());
+            p.setString(3, aPrefab.getApellido());
+                instancias = p.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         }
         return instancias;
     }
 
-    /*  Hacer pero sera algo tipo si no exite creas si existe actualizas pero a ver como coño ves desde la sql si esta la instancia mientras recorres el bucle
-    public static int crearActualizarAutorias(HashMap <Integer, Autoria> autores){  //TEST
-        int id;
-        for(Map.Entry<Integer, Autoria> hm : autores.entrySet()){
-            id = hm.getKey();
-            instancias = leerAutoria(id);
-        }
-        return instancias;
-    }
-    */
 }
