@@ -64,7 +64,8 @@ public class TEST {
         HashMap<Integer, Autoria> testAutor = new HashMap<>();
         testAutor = leerTodasAutorias();
         System.out.println(testAutor);
-        */
+
+ */
 
         /*
         HashMap<Integer, Autoria> autorias = new HashMap<>();
@@ -90,7 +91,9 @@ public class TEST {
         librosTest.put("5647867654E", l4);
 
         crearActualizarLibros(librosTest);
+        */
+
     }
-    */
+
 
 }

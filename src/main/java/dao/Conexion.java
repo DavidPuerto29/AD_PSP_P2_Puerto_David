@@ -15,7 +15,7 @@ public class Conexion {
         return con;
     }
 
-    public void createTables(){ //furula
+    public static void createTables(){ //furula
         String sqlAu ="create table if not exists autorias"+
                 "(id varchar(50) primary key," +
                 "nombre varchar(50) not null," +

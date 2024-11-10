@@ -81,7 +81,7 @@ public class AutoriaDAO {
         return instancias;
     }
 
-    public static HashMap<Integer, Autoria> leerTodasAutorias(){ //Test
+    public static HashMap<Integer, Autoria> leerTodasAutorias(){ //Funciona
         HashMap<Integer, Autoria> autorias = new HashMap<>();
         String sql = "select * from autorias";
         try(Connection con = Conexion.conectar()){

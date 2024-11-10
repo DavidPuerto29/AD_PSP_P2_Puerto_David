@@ -12,6 +12,9 @@ import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
+import static dao.AutoriaDAO.*;
+import static dao.Conexion.createTables;
+import static dao.LibroDao.*;
 import static ficheros.GestionaFicherosHilos.*;
 
 /**
@@ -30,8 +33,8 @@ public class Biblioteca implements Serializable {
      * Se declaran los dos HashMap en la clase biblioteca que serán los utilizados
      * para la gestión de los datos en tiempo real.
      */
-    private static final HashMap <String, Libro> libros = new HashMap<>();
-    private static final HashMap <Integer, Autoria> autores = new HashMap<>();
+    private static HashMap <String, Libro> libros = new HashMap<>();
+    private static HashMap <Integer, Autoria> autores = new HashMap<>();
 
     /**
      * En el método main primero se intenta leer el fichero binario para importar datos
@@ -46,12 +49,18 @@ public class Biblioteca implements Serializable {
      * podido introducir y se mostrara un mensaje de programa finalizado.
      *
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {    //Gestionar excepciones
         boolean bucle = true;
         System.out.println("Bienvenido al gestor de biblioteca");
         try {
             //En caso de que se encuentre, se lee el fichero binario para cargar datos de usos posteriores del programa.
             leerBin(Biblioteca.autores, Biblioteca.libros);
+            //Creamos las tablas sql de la base de datos.
+            createTables();
+            //Leemos las tablas sql de autorias y de libros.
+            //importante primero leer los autores ya que si no los libros al no tener idAutor se crean nulls.
+            autores = leerTodasAutorias();
+            libros = leerTodosLibros();
         }catch ( FileNotFoundException e) {
             System.out.println("Veo que esta es tu primera vez \n¿Por donde quieres empezar?");
         } catch (IOException e) {
@@ -165,7 +174,9 @@ public class Biblioteca implements Serializable {
                         //Se comprueba que los String no tengan números.
                         if((comprobarString(nombre) && comprobarString(apellido))) {
                             autores.put(id,new Autoria(id,nombre,apellido));
-                                System.out.println("Autor añadido correctamente.");
+                                    //Insertamos el nuevo autor en la base de datos.
+                                    insertarAutoria(autores.get(id));
+                                        System.out.println("Autor añadido correctamente.");
                         }else{
                             System.out.println("Por favor, introduzca un nombre o apellido sin caracteres numéricos.");
                         }
@@ -222,7 +233,9 @@ public class Biblioteca implements Serializable {
         if(comprobarString(titulo)) {
             if (autores.containsKey(idAutor)) {
                 libros.put(isbn, new Libro(isbn, titulo, autores.get(idAutor)));
-                System.out.println("Libro añadido correctamente.");
+                    //Insertamos el nuevo libro en la base de datos.
+                    insertarLibro(libros.get(isbn));
+                        System.out.println("Libro añadido correctamente.");
             } else if (idAutor != null) {
                 //En caso de que id sea null se informa al usuario de que el autor no existe.
                 System.out.println("El id de autor introducido no corresponde a ningún autor registrado.");
@@ -278,8 +291,10 @@ public class Biblioteca implements Serializable {
                 String isbn = sc.nextLine();
             if (libros.containsKey(isbn)) {
                 libros.remove(isbn);
-                    System.out.println("Libro eliminado correctamente.");
-                        break;
+                    //Eliminamos el libro de la base de datos.
+                    eliminarLibro(isbn);
+                        System.out.println("Libro eliminado correctamente.");
+                            break;
             } else {
                 boolean menu2 = true;
                 //Se encapsula en un bucle while, ya que si el usuario introduce un dato no correcto se le vuelva a requerir un dato correcto.
@@ -365,6 +380,9 @@ public class Biblioteca implements Serializable {
         if(f.exists()){
             try {
                 importarFicheros(f,autores,libros);
+                    //Introducimos los nuevos datos en la base de datos.
+                    crearActualizarAutorias(autores);       //SOLUCIONAR LA PRIMERA LLAMADA NO SE ACTUALIZA EPRO A APARTIR DE LA SEGUNDA SI
+                    crearActualizarLibros(libros);
                     System.out.println("Archivo importado correctamente.");
             } catch (IOException e) {
                 System.out.println("Error de entrada/salida al intentar importar los datos de un fichero.");
