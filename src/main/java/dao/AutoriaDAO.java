@@ -10,9 +10,24 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Esta clase se encarga de gestionar los métodos sql de la clase
+ * de autoria conteniendo las sentencias básicas y las requeridas
+ * para el funcionamiento y gestión de datos correcta.
+ *
+ * @author David Puerto Cuenca
+ * @version 1.0
+ */
 public class AutoriaDAO {
     private static int instancias = -1;
 
+    /**
+     * Este método se encarga de insertar en la tabla de autorias las nuevas
+     * autorias con sus parámetros, a partir de la autoria pedida por parámetro.
+     *
+     * @param autor El objeto de autoria que contiene los datos de la nueva instancia.
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int insertarAutoria(Autoria autor){  //Funciona
         String sql = "insert into autorias" +
                     "(id,nombre,apellido)" +
@@ -29,6 +44,13 @@ public class AutoriaDAO {
         return instancias;
     }
 
+    /**
+     * Este método se encarga de leer en la tabla de sql la autoria
+     * con el id correspondiente que se ha enviado por parámetro.
+     *
+     * @param id El id de autoria usado para realizar la consulta.
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int leerAutoria(int id){    //testear ns paq se usa
         Autoria a1 = null;
         String sql = "select * from autorias where id = ?";
@@ -53,6 +75,13 @@ public class AutoriaDAO {
         return instancias;
     }
 
+    /**
+     * Este método se encarga de actualizar en la tabla sql
+     * la autoria envidada por parámetro.
+     *
+     * @param autor El objeto de autoria que contiene los datos de la nueva instancia.
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int actualizarAutoria(Autoria autor){    //FUNCIONA
         String sql = "update autorias set nombre = ?, apellido = ? where id = ?";
 
@@ -68,6 +97,12 @@ public class AutoriaDAO {
         return instancias;
     }
 
+    /**
+     * Este método se encarga de eliminar en la tabla sql
+     * la autoria envidada por parámetro.
+     *
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int eliminarAutoria(int id){ //FUNCIONA
         String sql = "delete from autorias where id = ?";
 
@@ -81,6 +116,12 @@ public class AutoriaDAO {
         return instancias;
     }
 
+    /**
+     * Este método se encarga de leer todas las autorias de la tabla sql
+     * y de almacenarlos en un HashMap.
+     *
+     * @return Devuelve el HashMap con los datos de autorias autorizados.
+     */
     public static HashMap<Integer, Autoria> leerTodasAutorias(){ //Funciona
         HashMap<Integer, Autoria> autorias = new HashMap<>();
         String sql = "select * from autorias";

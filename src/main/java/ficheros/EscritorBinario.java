@@ -29,6 +29,14 @@ public class EscritorBinario extends Thread{
         } //TEST
     }
 
+    /**
+     *Este método permite guardas los datos del programa en un fichero binario mediante la ruta definida en la clase, ya que siempre se va a guardar en la misma posición
+     * mediante un ObjectOutputStream se escribe primero el HashMap de autores y después el de libros.
+     *
+     * @param autores HashMap que almacena todas las variables de los autores.
+     * @param libros  HashMap que almacena todas las variables de los libros.
+     * @throws IOException Puede lanzar un error de entrada/salida.
+     */
     private static void guardarBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros,File ficheroBin) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ficheroBin));
         oos.writeObject(autores);

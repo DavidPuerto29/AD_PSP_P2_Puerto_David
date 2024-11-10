@@ -29,6 +29,16 @@ public class LectorTexto extends Thread{
         } //TEST //TEST //TEST
     }
 
+    /**
+     * Este método permite importar ficheros de una ruta definida mediante el archivo file a los Hashmap de autores y libros,
+     * mediante un Buffered Reader y dos bucles while que tienen en cuenta la separación de autores y libros añadiendo primero los autores
+     * y después los libros.
+     *
+     * @param f Ruta donde se creara el fichero.
+     * @param autores Se piden los dos HashMap al añadir el método,
+     * @param libros  para realizar las integraciones (put) correctamente
+     * @throws IOException  Puede lanzar un error de entrada/salida.
+     */
     private static void importarFicheros(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException {
         String id = null;
         String nombre = null;

@@ -29,7 +29,25 @@ public class EscritorTexto extends Thread{
         } //TEST //TEST //TEST
     }
 
-
+    /**
+     * Este método permite exportar datos a un fichero recorriendo los HashMaps y escribiéndolos en el fichero de texto seleccionado,
+     * mediante un PrintWriter y dos bucles para recorrer y escribir en uno los autores y en otro los libros.
+     *
+     * @param f Ruta donde se creara el fichero.
+     * @param autores   Se necesita crear una variable del objeto para poder guardar ahi los datos depositados en el HashMap
+     * @param libros    y posteriormente hacer get a sus atributos en un PrintWriter para realizar la escritura,
+     * @throws IOException Puede lanzar un error de entrada/salida.
+     *
+     * Ejemplo de como se ordena el fichero:
+     *  ***AUT***
+     *  1       (Id)
+     *  manuel  (Nombre)
+     *  gonzalez (Apellido)
+     *  ***LIB***   Separación de libros con autores.
+     *  89797456    (Isbn)
+     *  lazarillo   (Título)
+     *  1   (Id de autor)
+     */
     private static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros,boolean append) throws IOException {
         Autoria a = null;
         Libro libroCopia = null;
