@@ -103,13 +103,14 @@ public class AutoriaDAO {
      *
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int eliminarAutoria(int id){ //FUNCIONA
+    public static int eliminarAutoria(int id){ //ACABAR
         String sql = "delete from autorias where id = ?";
 
         try(Connection con = Conexion.conectar()){
             PreparedStatement p = con.prepareStatement(sql);
             p.setInt(1, id );
             instancias = p.executeUpdate();
+            //HAY Q ELIMINAR LOS LIBROS CORRESPONDIENTES A ESA AUTORIA TMB
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
