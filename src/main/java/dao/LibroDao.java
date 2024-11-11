@@ -31,7 +31,7 @@ public class LibroDao {
         return instancias;
     }
 
-    public static int leerLibro(String isbn){    //testear ns paq se usa
+    public static Libro leerLibro(String isbn){    //testear ns paq se usa
         Libro l1 = null;
         String sql = "select * from libros where isbn = ?";
         instancias = 0;
@@ -52,7 +52,7 @@ public class LibroDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return instancias;
+        return l1;
     }
 
     public static int actualizarLibro(Libro libro){    //Funciona

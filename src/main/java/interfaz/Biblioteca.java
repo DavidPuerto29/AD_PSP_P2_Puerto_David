@@ -69,11 +69,10 @@ public class Biblioteca implements Serializable {
             System.out.println("Error de entrada/salida.");
         } catch (ClassNotFoundException e) {
             System.out.println("La clase deseada no ha sido encontrada.");
+        } catch (InterruptedException e) {
+            System.out.println("Hilo interrumpido en la ejecución");
         }
         while (bucle) {
-            //test
-            System.out.println("a"+autores);
-            System.out.println("a"+libros);
                 System.out.println("""
                              ╔════════════════════|Menu Biblioteca|══════════════════════╗  \r
                         	 ║	               1 Crear autores		                     ║\r
@@ -120,6 +119,8 @@ public class Biblioteca implements Serializable {
                                 guardarBin(Biblioteca.autores, Biblioteca.libros);
                             } catch (IOException e) {
                                 System.out.println("Error de entrada/salida al intentar guardar el fichero binario.");
+                            } catch (InterruptedException e) {
+                                System.out.println("Hilo interrumpido en la ejecución");
                             }
                         }else{
                             System.out.println("Para exportar un fichero binario debe de tener al menos un autor registrado.");
@@ -128,10 +129,15 @@ public class Biblioteca implements Serializable {
                     case 9:
                         try {
                             leerBin(Biblioteca.autores, Biblioteca.libros);
+                            //Introducimos los nuevos datos en la base de datos.
+                            crearActualizarAutorias(autores);
+                            crearActualizarLibros(libros);
                         } catch (IOException e) {
                             System.out.println("No hay un fichero binario guardado, por favor cree uno primero.");
                         } catch (ClassNotFoundException e) {
                             System.out.println("La clase deseada no ha sido encontrada.");
+                        } catch (InterruptedException e) {
+                            System.out.println("Hilo interrumpido en la ejecución");
                         }
                         break;
 
@@ -146,6 +152,8 @@ public class Biblioteca implements Serializable {
             guardarBin(Biblioteca.autores, Biblioteca.libros);  //Exportación al fichero binario al finalizar el programa.
         } catch (IOException e) {
             System.out.println("Error de entrada/salida al intentar guardar el fichero binario.");
+        } catch (InterruptedException e) {
+            System.out.println("Hilo interrumpido en la ejecución");
         }
         System.out.println("Programa finalizado.");
     }
@@ -350,7 +358,8 @@ public class Biblioteca implements Serializable {
                     try {
                         if (f.exists()) {
                             System.out.println("¿Desea sobreescribir el fichero?");
-                            ruta = sc.nextLine().toLowerCase();     //Reutilización de variables para ahorrar memoria.
+                            //Reutilización de variables para ahorrar memoria.
+                            ruta = sc.nextLine().toLowerCase();
                             if (ruta.equals("si")) {
                                 exportarFichero(f, autores, libros);
                                 System.out.println("Archivo sobreescrito correctamente.");
@@ -363,6 +372,8 @@ public class Biblioteca implements Serializable {
                         }
                     } catch (IOException e) {
                         System.out.println("Error de entrada/salida al intentar exportar el fichero.");
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
                 }else{
                     System.out.println("Para exportar un fichero debe de tener al menos un autor registrado.");
@@ -387,11 +398,13 @@ public class Biblioteca implements Serializable {
             try {
                 importarFicheros(f,autores,libros);
                     //Introducimos los nuevos datos en la base de datos.
-                    crearActualizarAutorias(autores);       //SOLUCIONAR LA PRIMERA LLAMADA NO SE ACTUALIZA EPRO A APARTIR DE LA SEGUNDA SI
+                    crearActualizarAutorias(autores);
                     crearActualizarLibros(libros);
                     System.out.println("Archivo importado correctamente.");
             } catch (IOException e) {
                 System.out.println("Error de entrada/salida al intentar importar los datos de un fichero.");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }else{
             System.out.println("Error el archivo no ha sido encontrado.");

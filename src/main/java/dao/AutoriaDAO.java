@@ -51,7 +51,7 @@ public class AutoriaDAO {
      * @param id El id de autoria usado para realizar la consulta.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int leerAutoria(int id){    //testear ns paq se usa
+    public static Autoria leerAutoria(int id){    //testear ns paq se usa
         Autoria a1 = null;
         String sql = "select * from autorias where id = ?";
         instancias = 0;
@@ -72,7 +72,7 @@ public class AutoriaDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return instancias;
+        return a1;
     }
 
     /**

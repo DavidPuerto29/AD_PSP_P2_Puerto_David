@@ -23,15 +23,16 @@ public class Conexion {
      */
     protected static Connection conectar() throws SQLException {    //furula
         String user = "root";
-        String pass = "root";
+        String passCasa = "root";
         String url = "jdbc:mysql://localhost:3306/biblioteca?useSSL=false";
-        return DriverManager.getConnection(url, user ,pass);    //sino funciona he cambiado esto
+        String passInsti = "Sandia4you";
+        return DriverManager.getConnection(url, user ,passInsti);
     }
 
     /**
      * Este método se encarga de crear las tablas sql de autoria y libros del
      * programa para su correcta gestión, en caso de existir las tablas no se
-     * crearan como asi indica la sentencia de sql.
+     * crearán como asi indica la sentencia de sql.
      */
     public static void createTables(){ //furula
         String sqlAu ="create table if not exists autorias"+

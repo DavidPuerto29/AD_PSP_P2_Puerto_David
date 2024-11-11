@@ -28,29 +28,31 @@ public class GestionaFicherosHilos implements Serializable{
     private static final File  ficheroBin = new File("./files/biblioteca.bin");
 
 
-    public static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException{
+    public static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
        boolean append = false; //PROGRAMAR BIEN
         EscritorTexto es = new EscritorTexto(f,autores,libros,append);
         System.out.println("hola");
         es.start();
+        es.join();
     }
 
-    public static void importarFicheros(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException {
+    public static void importarFicheros(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
         LectorTexto lt = new LectorTexto(f,autores,libros);
         lt.start();
+        lt.join();
     }
 
 
-    public static void guardarBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException {
+    public static void guardarBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
         EscritorBinario eb = new EscritorBinario(ficheroBin,autores,libros);
-
         eb.start();
+        eb.join();
     }
 
 
-    public static void leerBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, ClassNotFoundException {
+    public static void leerBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, ClassNotFoundException, InterruptedException {
         LectorBinario lb = new LectorBinario(ficheroBin,autores,libros);
-
         lb.start();
+        lb.join();
     }
 }
