@@ -54,24 +54,14 @@ public class Biblioteca implements Serializable {
         boolean bucle = true;
 
         System.out.println("Bienvenido al gestor de biblioteca");
-        try {
-            //En caso de que se encuentre, se lee el fichero binario para cargar datos de usos posteriores del programa.
-            leerBin(Biblioteca.autores, Biblioteca.libros);
+
             //Creamos las tablas sql de la base de datos.
             createTables();
             //Leemos las tablas sql de autorias y de libros.
             //importante primero leer los autores ya que si no los libros al no tener idAutor se crean nulls.
             autores = leerTodasAutorias();
             libros = leerTodosLibros();
-        }catch ( FileNotFoundException e) {
-            System.out.println("Veo que esta es tu primera vez \n¿Por donde quieres empezar?");
-        } catch (IOException e) {
-            System.out.println("Error de entrada/salida.");
-        } catch (ClassNotFoundException e) {
-            System.out.println("La clase deseada no ha sido encontrada.");
-        } catch (InterruptedException e) {
-            System.out.println("Hilo interrumpido en la ejecución");
-        }
+
         while (bucle) {
                 System.out.println("""
                              ╔════════════════════|Menu Biblioteca|══════════════════════╗  \r
@@ -148,13 +138,9 @@ public class Biblioteca implements Serializable {
                         break;
                 }
             }
-        try {
-            guardarBin(Biblioteca.autores, Biblioteca.libros);  //Exportación al fichero binario al finalizar el programa.
-        } catch (IOException e) {
-            System.out.println("Error de entrada/salida al intentar guardar el fichero binario.");
-        } catch (InterruptedException e) {
-            System.out.println("Hilo interrumpido en la ejecución");
-        }
+        //Antes de finalizar el programa comprobamos que todos los datos esten sincronizados.
+        crearActualizarAutorias(autores);
+        crearActualizarLibros(libros);
         System.out.println("Programa finalizado.");
     }
 
