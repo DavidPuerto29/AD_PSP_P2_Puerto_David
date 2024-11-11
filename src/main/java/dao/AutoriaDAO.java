@@ -141,6 +141,13 @@ public class AutoriaDAO {
         return autorias;
     }
 
+    /**
+     * Este método se encarga de crear en caso de que las autorias no existan o de actualizarlas en caso
+     * de que existan pero tengan parámetros diferentes.
+     *
+     * @param autores Contiene los datos introducidos en el programa para exportarlos a la base de datos.
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int crearActualizarAutorias(HashMap <Integer, Autoria> autores){  //Funciona
         String sql = "insert into autorias " +
                      "(id, nombre, apellido)" +

@@ -8,16 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Clase que encapsula todos los métodos que permiten la escritura y lectura de ficheros y binarios.
- * En la clase biblioteca se realizan llamadas a estos métodos para realizar diferentes acciones de gestión de datos.
- *
- * ---------------------------------------------------Nota------------------------------------------------------
- * Si ejecutas el programa en linux es probable que puedas encontrarte errores de que no lea bien los ficheros,
- * ya que ha sido desarrollado en windows y en el ordenador de clase con ubuntu he tenido algunos conflictos
- * con los ficheros al probar el programa.
+ * Clase que permite gestionar todas las ejecuciónes multihilo de las diferentes clases
+ * de lectura/escritura.
  *
  * @author David Puerto Cuenca
- * @version 1.0
+ * @version 2.0
  */
 
 public class GestionaFicherosHilos implements Serializable{

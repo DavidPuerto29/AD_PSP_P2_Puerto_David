@@ -12,9 +12,24 @@ import java.util.Map;
 
 import static dao.AutoriaDAO.leerTodasAutorias;
 
+/**
+ * Esta clase se encarga de gestionar los métodos sql de la clase
+ * de libro conteniendo las sentencias básicas y las requeridas
+ * para el funcionamiento y gestión de datos correcta.
+ *
+ * @author David Puerto Cuenca
+ * @version 1.0
+ */
 public class LibroDao {
     private static int instancias = -1;
 
+    /**
+     * Este método se encarga de insertar en la tabla de libros los nuevos
+     * libros con sus parámetros, a partir del libro pedido por parámetro.
+     *
+     * @param libro El objeto de libro que contiene los datos de la nueva instancia.
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int insertarLibro(Libro libro){  //Funciona
         String sql = "insert into libros" +
                 "(isbn,titulo,idautoria)" +
@@ -31,6 +46,13 @@ public class LibroDao {
         return instancias;
     }
 
+    /**
+     * Este método se encarga de leer en la tabla de sql libros
+     * con el isbn correspondiente que se ha enviado por parámetro.
+     *
+     * @param isbn El isbn de libro usado para realizar la consulta.
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static Libro leerLibro(String isbn){    //testear ns paq se usa
         Libro l1 = null;
         String sql = "select * from libros where isbn = ?";
@@ -55,6 +77,13 @@ public class LibroDao {
         return l1;
     }
 
+    /**
+     * Este método se encarga de actualizar en la tabla sql
+     * el libro envidado por parámetro.
+     *
+     * @param libro El objeto de libro que contiene los datos de la nueva instancia.
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int actualizarLibro(Libro libro){    //Funciona
         String sql = "update libros set titulo = ?, idautoria = ? where isbn = ?";
 
@@ -70,6 +99,12 @@ public class LibroDao {
         return instancias;
     }
 
+    /**
+     * Este método se encarga de eliminar en la tabla sql
+     * el libro envidado por parámetro.
+     *
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int eliminarLibro(String isbn){ //Funciona
         String sql = "delete from libros where isbn = ?";
 
@@ -84,11 +119,16 @@ public class LibroDao {
     }
 
     /**
-     * Notas se supoone q el libro debe de tener siempre autor por lo tanto podemos llamar al metodo de
-     * obtener todos los autores para evitar repeticion de codigo y de tener q hacer otra sentencia sql
-     * a si que alk estar siempre el autor creado no deberia de habre nulls etc
-     * explicar bonito cuando haga el javadoc
-     * @return
+     * Este método se encarga de leer todos los libros de la tabla sql
+     * y de almacenarlos en un HashMap, a tener en cuenta que Libro contiene la
+     * autoria con la que se relaciona, por lo tanto, necesitaremos el objeto autoria
+     * correspondiente, por eso para evitar repetición de código se guardan en un hashmap
+     * todas las autorias y mediante el método get se obtiene el objeto autoria.
+     *
+     * No se deberían de producir errores, ya que para crear un libro tiene que haber autores
+     * creados, porque si o si hay que relacionarlo con un autor.
+     *
+     * @return Devuelve el hashMap con todos los libros importados.
      */
     public static HashMap<String, Libro> leerTodosLibros(){//Funciona
         HashMap<String, Libro> libros = new HashMap<>();
@@ -111,6 +151,13 @@ public class LibroDao {
         return libros;
     }
 
+    /**
+     * Este método se encarga de crear instancias en caso de que los libros no existan o de actualizarlos en caso
+     * de que existan pero tengan parámetros diferentes.
+     *
+     * @param libros Contiene los datos introducidos en el programa para exportarlos a la base de datos.
+     * @return Devuelve el número de filas de la tabla afectadas.
+     */
     public static int crearActualizarLibros(HashMap<String, Libro> libros){  //Funciona
         String sql = "insert into libros" +
                 "(isbn,titulo,idautoria)" +

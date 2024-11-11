@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Esta clase se encarga de almacenar los método que el programa utiliza para conectase
+ * Esta clase se encarga de almacenar los métodos que el programa utiliza para conectarse
  * a la base de datos deseada para el correcto almacenamiento de datos.
  *
  * @author David Puerto Cuenca

@@ -22,11 +22,11 @@ import static ficheros.GestionaFicherosHilos.*;
  * registrados en su HashMap correspondiente misma además contando de exportación/importación a ficheros
  * y a ficheros binarios, aquí se encuentra el main del programa y sus correspondientes metodos estáticos.
  *
- *  * Cuentas con un archivo de texto llamado prefab en la carpeta files del proyecto que incluye un ejemplo de
- *  * biblioteca con 10 instancias de autores con sus respectivos 10 libros.
+ * Cuentas con un archivo de texto llamado prefab en la carpeta files del proyecto que incluye un ejemplo de
+ * biblioteca con 10 instancias de autores con sus respectivos 10 libros.
  *
  * @author David Puerto Cuenca
- * @version 1.0
+ * @version 2.0
  */
 public class Biblioteca implements Serializable {
     /**
@@ -58,7 +58,7 @@ public class Biblioteca implements Serializable {
             //Creamos las tablas sql de la base de datos.
             createTables();
             //Leemos las tablas sql de autorias y de libros.
-            //importante primero leer los autores ya que si no los libros al no tener idAutor se crean nulls.
+            //Importante primero leer los autores, ya que si no los libros al no tener idAutor puede crear conflictos.
             autores = leerTodasAutorias();
             libros = leerTodosLibros();
 
@@ -138,7 +138,7 @@ public class Biblioteca implements Serializable {
                         break;
                 }
             }
-        //Antes de finalizar el programa comprobamos que todos los datos esten sincronizados.
+        //Antes de finalizar el programa comprobamos que todos los datos estén sincronizados.
         crearActualizarAutorias(autores);
         crearActualizarLibros(libros);
         System.out.println("Programa finalizado.");
@@ -404,11 +404,6 @@ public class Biblioteca implements Serializable {
      * y se hace return de null.
      *
      * @return En caso de que el dato no sea numérico se devolverá null.
-     * -------------------------------------------NOTA-------------------------------------------------------------------------------
-     * Importante, ya que se declara una variable número para no sobreescribir el Scanner sc de string si se pone la misma variable
-     * para estos dos métodos (num) en vez de cambiar uno a otro número (numInt) corres el riesgo de estar 1 hora volviéndote loco leyendo
-     * el código teniendo que volver a una copia de seguridad sin entender el error como hice yo :).
-     * En ese momento tenía dos métodos iguales para gestionar en uno int y en otro Integer, pero al final decidí hacer el programa con integer solo
      */
     private static Integer escribirInteger(){
         Scanner num = new Scanner(System.in);
@@ -421,7 +416,7 @@ public class Biblioteca implements Serializable {
     }
 
     /**
-     * Este método se encarga de la gestión de errores al pedirle al usuario que introduzca textos como pueden ser nombres, apellidos etc...
+     * Este método se encarga de la gestión de errores al pedirle al usuario que introduzca textos como pueden ser nombres, apellidos etc...,
      * ya que si se introducen caracteres numéricos puede crear errores y HashMaps nulls.
      *
      * @return true si el texto no contiene números, false si contiene números.
