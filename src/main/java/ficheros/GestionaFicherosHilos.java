@@ -22,7 +22,15 @@ public class GestionaFicherosHilos implements Serializable{
      */
     private static final File  ficheroBin = new File("./files/biblioteca.bin");
 
-
+    /**
+     * Se encarga de gestionar la ejecución multihilo de la clase EscritorTexto.
+     *
+     * @param f El archivo file que contiene la ruta donde se guardaran los datos.
+     * @param autores El HashMap que contiene los datos de las autorias.
+     * @param libros  El HashMap que contiene los datos de los libros.
+     * @throws IOException Puede lanzar un error de entrada/salida.
+     * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
+     */
     public static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
        boolean append = false; //PROGRAMAR BIEN
         EscritorTexto es = new EscritorTexto(f,autores,libros,append);
@@ -31,20 +39,46 @@ public class GestionaFicherosHilos implements Serializable{
         es.join();
     }
 
+    /**
+     * Se encarga de gestionar la ejecucion multihilo de la clase LectorTexto.
+     *
+     * @param f El archivo file que contiene la ruta donde se guardaran los datos.
+     * @param autores El HashMap que contiene los datos de las autorias.
+     * @param libros  El HashMap que contiene los datos de los libros.
+     * @throws IOException Puede lanzar un error de entrada/salida.
+     * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
+     */
     public static void importarFicheros(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
         LectorTexto lt = new LectorTexto(f,autores,libros);
         lt.start();
         lt.join();
     }
 
-
+    /**
+     * Se encarga de gestionar la ejecución multihilo de la clase EscritorBinario.
+     *
+     * @param f El archivo file que contiene la ruta donde se guardaran los datos.
+     * @param autores El HashMap que contiene los datos de las autorias.
+     * @param libros  El HashMap que contiene los datos de los libros.
+     * @throws IOException Puede lanzar un error de entrada/salida.
+     * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
+     */
     public static void guardarBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
         EscritorBinario eb = new EscritorBinario(ficheroBin,autores,libros);
         eb.start();
         eb.join();
     }
 
-
+    /**
+     * Se encarga de gestionar la ejecución multihilo de la clase LectorBinario.
+     *
+     * @param f El archivo file que contiene la ruta donde se guardaran los datos.
+     * @param autores El HashMap que contiene los datos de las autorias.
+     * @param libros  El HashMap que contiene los datos de los libros.
+     * @throws IOException Puede lanzar un error de entrada/salida.
+     * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
+     * @throws ClassNotFoundException En caso de que la clase deseada no haya sido encontrada.
+     */
     public static void leerBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, ClassNotFoundException, InterruptedException {
         LectorBinario lb = new LectorBinario(ficheroBin,autores,libros);
         lb.start();

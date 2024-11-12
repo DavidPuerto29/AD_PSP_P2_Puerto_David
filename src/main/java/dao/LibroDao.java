@@ -132,7 +132,7 @@ public class LibroDao {
      */
     public static HashMap<String, Libro> leerTodosLibros(){//Funciona
         HashMap<String, Libro> libros = new HashMap<>();
-        //Reutilizamos el metodo para evitar la repetición de codigo ya que este nos devuelve todas las autorias.
+        //Reutilizamos el método para evitar la repetición de código, ya que este nos devuelve todas las autorias.
         HashMap<Integer, Autoria> autores = leerTodasAutorias();
         String sql = "select * from libros";
         try(Connection con = Conexion.conectar()){
