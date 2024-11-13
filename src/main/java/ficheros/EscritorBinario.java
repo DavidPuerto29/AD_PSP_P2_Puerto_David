@@ -22,11 +22,11 @@ public class EscritorBinario extends Thread{
 
     @Override
     public void run(){
-        try {   //TEST //TEST //TEST
+        try {
             guardarBin(autores,libros,ficheroBin);
-        } catch (IOException e) { //TEST //TEST //TEST
-            throw new RuntimeException(e);
-        } //TEST
+        } catch (IOException e) {
+            System.out.println("Error de entrada/salida al intentar guardar el fichero binario.");
+        }
     }
 
     /**

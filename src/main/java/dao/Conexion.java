@@ -21,7 +21,7 @@ public class Conexion {
      * @return Devuelve los datos de la clase Connection.
      * @throws SQLException Puede lanzar una excepción sql.
      */
-    protected static Connection conectar() throws SQLException {    //furula
+    protected static Connection conectar() throws SQLException {
         String user = "root";
         String passCasa = "root";
         String url = "jdbc:mysql://localhost:3306/biblioteca?useSSL=false";
@@ -34,7 +34,7 @@ public class Conexion {
      * programa para su correcta gestión, en caso de existir las tablas no se
      * crearán como asi indica la sentencia de sql.
      */
-    public static void createTables(){ //furula
+    public static void createTables(){
         String sqlAu ="create table if not exists autorias"+
                 "(id varchar(50) primary key," +
                 "nombre varchar(50) not null," +
@@ -51,7 +51,7 @@ public class Conexion {
             st = c.createStatement();
                 st.executeUpdate(sqlLib);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
     }
 }

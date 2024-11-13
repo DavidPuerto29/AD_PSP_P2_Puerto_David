@@ -22,11 +22,11 @@ public class EscritorTexto extends Thread{
 
     @Override
     public void run(){
-        try {   //TEST //TEST
+        try {
             exportarFichero(f,autores,libros,append);
-        } catch (IOException e) { //TEST //TEST //TEST
-            throw new RuntimeException(e);
-        } //TEST //TEST //TEST
+        } catch (IOException e) {
+            System.out.println("Error de entrada/salida al intentar exportar el fichero.");
+        }
     }
 
     /**

@@ -22,11 +22,11 @@ public class LectorTexto extends Thread{
 
     @Override
     public void run(){
-        try {       //TEST //TEST //TEST //TEST //TEST
+        try {
             importarFicheros(f,autores,libros);
-        } catch (IOException e) {  //TEST //TEST //TEST //TEST //TEST
-            throw new RuntimeException(e);
-        } //TEST //TEST //TEST
+        } catch (IOException e) {
+            System.out.println("Error de entrada/salida al intentar importar los datos de un fichero.");
+        }
     }
 
     /**

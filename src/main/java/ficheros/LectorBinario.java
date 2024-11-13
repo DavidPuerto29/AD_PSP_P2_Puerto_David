@@ -24,9 +24,11 @@ public class LectorBinario extends Thread{
     public void run(){
         try {   //TEST
             leerBin(ficheroBinario,autores,libros);
-        } catch (IOException | ClassNotFoundException e) { //TEST
-            System.out.println("e");
-        } //TEST
+        } catch (IOException e) { //TEST
+            System.out.println("No hay un fichero binario guardado, por favor cree uno primero.");
+        }catch (ClassNotFoundException e) {
+            System.out.println("La clase deseada no ha sido encontrada.");
+        }
     }
 
     /**

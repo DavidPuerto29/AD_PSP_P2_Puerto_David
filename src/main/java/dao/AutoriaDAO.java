@@ -19,7 +19,7 @@ import java.util.Map;
  * @version 1.0
  */
 public class AutoriaDAO {
-    private static int instancias = -1;
+    private static int instancias = 0;
 
     /**
      * Este método se encarga de insertar en la tabla de autorias las nuevas
@@ -28,7 +28,7 @@ public class AutoriaDAO {
      * @param autor El objeto de autoria que contiene los datos de la nueva instancia.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int insertarAutoria(Autoria autor){  //Funciona
+    public static int insertarAutoria(Autoria autor){
         String sql = "insert into autorias" +
                     "(id,nombre,apellido)" +
                     "values(?,?,?)";
@@ -37,9 +37,9 @@ public class AutoriaDAO {
             s.setInt(1, autor.getId());
             s.setString(2, autor.getNombre());
             s.setString(3, autor.getApellido());
-            instancias = s.executeUpdate();
+                instancias = s.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return instancias;
     }
@@ -51,26 +51,22 @@ public class AutoriaDAO {
      * @param id El id de autoria usado para realizar la consulta.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static Autoria leerAutoria(int id){    //testear ns paq se usa
+    public static Autoria leerAutoria(int id){
         Autoria a1 = null;
         String sql = "select * from autorias where id = ?";
-        instancias = 0;
 
         try(Connection con = Conexion.conectar()){
             PreparedStatement p = con.prepareStatement(sql);
                 p.setInt(1, id);
                     ResultSet rs = p.executeQuery();
-                    while(rs.next()){       //COMPROBAR ESTO Q NO ME FIO
-                        instancias++;
-                    }
                     if(rs.next()){
                         int num = rs.getInt(1);
-                            String nombre = rs.getString("nombre");
-                                String apellido = rs.getString("apellidos");
-                                    a1 = new Autoria(num,nombre,apellido);
+                        String nombre = rs.getString("nombre");
+                        String apellido = rs.getString("apellidos");
+                        a1 = new Autoria(num,nombre,apellido);
                     }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return a1;
     }
@@ -82,7 +78,7 @@ public class AutoriaDAO {
      * @param autor El objeto de autoria que contiene los datos de la nueva instancia.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int actualizarAutoria(Autoria autor){    //FUNCIONA
+    public static int actualizarAutoria(Autoria autor){
         String sql = "update autorias set nombre = ?, apellido = ? where id = ?";
 
         try(Connection con = Conexion.conectar()){
@@ -92,7 +88,7 @@ public class AutoriaDAO {
                 p.setInt(3, autor.getId());
                 instancias = p.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return instancias;
     }
@@ -112,7 +108,7 @@ public class AutoriaDAO {
             instancias = p.executeUpdate();
             //HAY Q ELIMINAR LOS LIBROS CORRESPONDIENTES A ESA AUTORIA TMB
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return instancias;
     }
@@ -123,7 +119,7 @@ public class AutoriaDAO {
      *
      * @return Devuelve el HashMap con los datos de autorias autorizados.
      */
-    public static HashMap<Integer, Autoria> leerTodasAutorias(){ //Funciona
+    public static HashMap<Integer, Autoria> leerTodasAutorias(){
         HashMap<Integer, Autoria> autorias = new HashMap<>();
         String sql = "select * from autorias";
         try(Connection con = Conexion.conectar()){
@@ -137,7 +133,7 @@ public class AutoriaDAO {
                 autorias.put(id,autorLibro);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return autorias;
     }
@@ -149,7 +145,7 @@ public class AutoriaDAO {
      * @param autores Contiene los datos introducidos en el programa para exportarlos a la base de datos.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int crearActualizarAutorias(HashMap <Integer, Autoria> autores){  //Funciona
+    public static int crearActualizarAutorias(HashMap <Integer, Autoria> autores){
         String sql = "insert into autorias " +
                      "(id, nombre, apellido)" +
                      "values (?,?,?)" +
@@ -166,7 +162,7 @@ public class AutoriaDAO {
             p.setString(3, aPrefab.getApellido());
                 instancias = p.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         }
         return instancias;

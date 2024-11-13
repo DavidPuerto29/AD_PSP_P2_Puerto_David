@@ -31,7 +31,7 @@ public class GestionaFicherosHilos implements Serializable{
      * @throws IOException Puede lanzar un error de entrada/salida.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
      */
-    public static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
+    public static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws  InterruptedException {
        boolean append = false; //PROGRAMAR BIEN
         EscritorTexto es = new EscritorTexto(f,autores,libros,append);
         System.out.println("hola");
@@ -48,7 +48,7 @@ public class GestionaFicherosHilos implements Serializable{
      * @throws IOException Puede lanzar un error de entrada/salida.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
      */
-    public static void importarFicheros(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
+    public static void importarFicheros(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
         LectorTexto lt = new LectorTexto(f,autores,libros);
         lt.start();
         lt.join();
@@ -63,7 +63,7 @@ public class GestionaFicherosHilos implements Serializable{
      * @throws IOException Puede lanzar un error de entrada/salida.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
      */
-    public static void guardarBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, InterruptedException {
+    public static void guardarBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
         EscritorBinario eb = new EscritorBinario(ficheroBin,autores,libros);
         eb.start();
         eb.join();
@@ -79,7 +79,7 @@ public class GestionaFicherosHilos implements Serializable{
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
      * @throws ClassNotFoundException En caso de que la clase deseada no haya sido encontrada.
      */
-    public static void leerBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws IOException, ClassNotFoundException, InterruptedException {
+    public static void leerBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
         LectorBinario lb = new LectorBinario(ficheroBin,autores,libros);
         lb.start();
         lb.join();

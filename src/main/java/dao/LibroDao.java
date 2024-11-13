@@ -21,7 +21,7 @@ import static dao.AutoriaDAO.leerTodasAutorias;
  * @version 1.0
  */
 public class LibroDao {
-    private static int instancias = -1;
+    private static int instancias = 0;
 
     /**
      * Este método se encarga de insertar en la tabla de libros los nuevos
@@ -30,7 +30,7 @@ public class LibroDao {
      * @param libro El objeto de libro que contiene los datos de la nueva instancia.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int insertarLibro(Libro libro){  //Funciona
+    public static int insertarLibro(Libro libro){
         String sql = "insert into libros" +
                 "(isbn,titulo,idautoria)" +
                 "values(?,?,?)";
@@ -41,7 +41,7 @@ public class LibroDao {
             s.setInt(3, libro.getAutoria().getId());
             instancias = s.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return instancias;
     }
@@ -53,26 +53,24 @@ public class LibroDao {
      * @param isbn El isbn de libro usado para realizar la consulta.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static Libro leerLibro(String isbn){    //testear ns paq se usa
-        Libro l1 = null;
+    public static Libro leerLibro(String isbn){
         String sql = "select * from libros where isbn = ?";
-        instancias = 0;
+        Libro l1 = null;
+        HashMap<Integer, Autoria> autores = leerTodasAutorias();
 
         try(Connection con = Conexion.conectar()){
             PreparedStatement p = con.prepareStatement(sql);
             p.setString(1, isbn);
             ResultSet rs = p.executeQuery();
-            while(rs.next()){       //COMPROBAR ESTO Q NO ME FIO
-                instancias++;
-            }
             if(rs.next()){
                 String num = rs.getString(1);
                 String titulo = rs.getString("titulo");
-                Autoria autorLibro = (Autoria) rs.getObject("idautoria");   //Rezar para q funcione el cast
-                l1 = new Libro(isbn,titulo,autorLibro);
+                int  idAutor = rs.getInt("idautoria");
+                Autoria autorLibro = autores.get(idAutor);
+                 l1 = new Libro(isbn,titulo,autorLibro);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return l1;
     }
@@ -84,7 +82,7 @@ public class LibroDao {
      * @param libro El objeto de libro que contiene los datos de la nueva instancia.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int actualizarLibro(Libro libro){    //Funciona
+    public static int actualizarLibro(Libro libro){
         String sql = "update libros set titulo = ?, idautoria = ? where isbn = ?";
 
         try(Connection con = Conexion.conectar()){
@@ -94,7 +92,7 @@ public class LibroDao {
             p.setString(3, libro.getIsbn());
             instancias = p.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return instancias;
     }
@@ -105,7 +103,7 @@ public class LibroDao {
      *
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int eliminarLibro(String isbn){ //Funciona
+    public static int eliminarLibro(String isbn){
         String sql = "delete from libros where isbn = ?";
 
         try(Connection con = Conexion.conectar()){
@@ -113,7 +111,7 @@ public class LibroDao {
             p.setString(1, isbn );
             instancias = p.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return instancias;
     }
@@ -130,7 +128,7 @@ public class LibroDao {
      *
      * @return Devuelve el hashMap con todos los libros importados.
      */
-    public static HashMap<String, Libro> leerTodosLibros(){//Funciona
+    public static HashMap<String, Libro> leerTodosLibros(){
         HashMap<String, Libro> libros = new HashMap<>();
         //Reutilizamos el método para evitar la repetición de código, ya que este nos devuelve todas las autorias.
         HashMap<Integer, Autoria> autores = leerTodasAutorias();
@@ -146,7 +144,7 @@ public class LibroDao {
                         libros.put(isbn,new Libro(isbn,titulo,autorLibro));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         return libros;
     }
@@ -158,7 +156,7 @@ public class LibroDao {
      * @param libros Contiene los datos introducidos en el programa para exportarlos a la base de datos.
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int crearActualizarLibros(HashMap<String, Libro> libros){  //Funciona
+    public static int crearActualizarLibros(HashMap<String, Libro> libros){
         String sql = "insert into libros" +
                 "(isbn,titulo,idautoria)" +
                 "values(?,?,?)" +
@@ -175,7 +173,7 @@ public class LibroDao {
             p.setInt(3, lPrefab.getAutoria().getId());
                 instancias = p.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al conectarse a la base de datos.");
         }
         }
         return instancias;
