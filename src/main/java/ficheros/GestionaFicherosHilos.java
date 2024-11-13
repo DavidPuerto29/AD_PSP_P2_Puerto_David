@@ -28,7 +28,6 @@ public class GestionaFicherosHilos implements Serializable{
      * @param f El archivo file que contiene la ruta donde se guardaran los datos.
      * @param autores El HashMap que contiene los datos de las autorias.
      * @param libros  El HashMap que contiene los datos de los libros.
-     * @throws IOException Puede lanzar un error de entrada/salida.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
      */
     public static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws  InterruptedException {
@@ -45,7 +44,6 @@ public class GestionaFicherosHilos implements Serializable{
      * @param f El archivo file que contiene la ruta donde se guardaran los datos.
      * @param autores El HashMap que contiene los datos de las autorias.
      * @param libros  El HashMap que contiene los datos de los libros.
-     * @throws IOException Puede lanzar un error de entrada/salida.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
      */
     public static void importarFicheros(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
@@ -60,7 +58,6 @@ public class GestionaFicherosHilos implements Serializable{
      * @param f El archivo file que contiene la ruta donde se guardaran los datos.
      * @param autores El HashMap que contiene los datos de las autorias.
      * @param libros  El HashMap que contiene los datos de los libros.
-     * @throws IOException Puede lanzar un error de entrada/salida.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
      */
     public static void guardarBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
@@ -75,9 +72,7 @@ public class GestionaFicherosHilos implements Serializable{
      * @param f El archivo file que contiene la ruta donde se guardaran los datos.
      * @param autores El HashMap que contiene los datos de las autorias.
      * @param libros  El HashMap que contiene los datos de los libros.
-     * @throws IOException Puede lanzar un error de entrada/salida.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
-     * @throws ClassNotFoundException En caso de que la clase deseada no haya sido encontrada.
      */
     public static void leerBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
         LectorBinario lb = new LectorBinario(ficheroBin,autores,libros);

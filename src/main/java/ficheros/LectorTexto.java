@@ -9,6 +9,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * Implementa la programación multihilo al método en la clase, mediante la
+ * llamada y correcta gestión de la interfaz Runnable.
+ *
+ *@author David Puerto Cuenca
+ *@version 2.0
+ */
 public class LectorTexto extends Thread{
     private File f;
     private HashMap<Integer, Autoria> autores;
@@ -20,6 +27,11 @@ public class LectorTexto extends Thread{
         this.libros = libros;
     }
 
+    /**
+     * Este método gestiona los hilos del programa y también ejecuta
+     * el método definido dentro, con su correspondiente control de
+     * excepciones.
+     */
     @Override
     public void run(){
         try {

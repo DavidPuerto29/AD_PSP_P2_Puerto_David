@@ -6,6 +6,13 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementa la programación multihilo al método en la clase, mediante la
+ * llamada y correcta gestión de la interfaz Runnable.
+ *
+ *@author David Puerto Cuenca
+ *@version 2.0
+ */
 public class EscritorTexto extends Thread{
 
     private File f;
@@ -20,6 +27,11 @@ public class EscritorTexto extends Thread{
         this.append = append;
     }
 
+    /**
+     * Este método gestiona los hilos del programa y también ejecuta
+     * el método definido dentro, con su correspondiente control de
+     * excepciones.
+     */
     @Override
     public void run(){
         try {
