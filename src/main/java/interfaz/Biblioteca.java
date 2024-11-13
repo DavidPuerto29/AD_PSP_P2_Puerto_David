@@ -49,6 +49,8 @@ public class Biblioteca implements Serializable {
      * se realizará una exportación de fichero binario pra guardar todos los datos nuevos que haya
      * podido introducir y se mostrara un mensaje de programa finalizado.
      *
+     * V2.0 Se añade el uso de sentencias sql y todos los datos del programa son guardados en ella.
+     *
      */
     public static void main(String[] args) {    //Gestionar excepciones
         boolean bucle = true;
@@ -147,6 +149,8 @@ public class Biblioteca implements Serializable {
      * @see #escribirInteger() Es un metodo usado para la gestion de errores en la introducción de numeros asegurandose de que sea
      * un dato correcto.
      * @see #comprobarString(String) Es un metodo usado para evitar que se creen instancias del HashMap null.
+     *
+     * V2.0 Se añade la llamada metodo insertarAutoria para insertar el dato en la sql.
      */
     private static void crearAutor(){
         Scanner sc = new Scanner(System.in);
@@ -206,6 +210,8 @@ public class Biblioteca implements Serializable {
      * @see #escribirInteger() Es un metodo usado para la gestion de errores en la introducción de numeros asegurandose de que sea
      * un dato correcto.
      * @see #comprobarString(String) Es un metodo usado para evitar que se creen instancias del HashMap null.
+     *
+     * V2.0 Se añade la llamada metodo insertarLibro para insertar el dato en la sql.
      */
     private static void crearLibro(){
         Scanner sc = new Scanner(System.in);
@@ -270,6 +276,8 @@ public class Biblioteca implements Serializable {
      *
      * @see #escribirInteger() Es un metodo usado para la gestion de errores en la introducción de numeros asegurandose de que sea
      * un dato correcto.
+     *
+     * V2.0 Se añade la llamada metodo eliminarLibro para insertar el dato en la sql.
      */
     private static void eliminarLibros(){
         Scanner sc = new Scanner(System.in);
@@ -366,6 +374,9 @@ public class Biblioteca implements Serializable {
      * que la exportación ha sido correcta.
      *
      * @see GestionaFicherosHilos#importarFicheros(File, HashMap, HashMap) Gestiona la entrada de los datos.
+     *
+     * V2.0 Se añade la llamada metodo crearActualizarAutorias y crearActualizarLibros
+     * para insertar los datos nuevos o en caso de existir actualizarlos en la sql.
      */
     private static void importarDeFichero(){
         Scanner sc = new Scanner(System.in);
