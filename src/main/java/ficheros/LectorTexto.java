@@ -35,7 +35,7 @@ public class LectorTexto extends Thread{
     @Override
     public void run(){
         try {
-            //Añadimos el metodo de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
+            //Añadimos el método de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
             synchronized (f) {
                 importarFicheros(f, autores, libros);
             }
@@ -66,7 +66,8 @@ public class LectorTexto extends Thread{
             apellido = br.readLine();
             autores.put(Integer.valueOf(id),new Autoria(Integer.valueOf(id),nombre,apellido));
         }
-        while ((nombre = br.readLine()) != null) {       //Leemos libros y también reutilizamos variables para evitar consumo de procesos abundante.
+        //Leemos libros y también reutilizamos variables para evitar consumo de procesos abundante.
+        while ((nombre = br.readLine()) != null) {
             apellido = br.readLine();    //(Titulo)
             id = br.readLine();         //(Id del autor)
             var = autores.get(Integer.valueOf(id));

@@ -31,8 +31,7 @@ public class GestionaFicherosHilos implements Serializable{
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
      */
     public static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws  InterruptedException {
-       boolean append = false; //PROGRAMAR BIEN
-        EscritorTexto es = new EscritorTexto(f,autores,libros,append);
+        EscritorTexto es = new EscritorTexto(f,autores,libros,false);
         System.out.println("hola");
         es.start();
     }
@@ -48,13 +47,14 @@ public class GestionaFicherosHilos implements Serializable{
     public static void importarFicheros(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
         LectorTexto lt = new LectorTexto(f,autores,libros);
         lt.start();
+        //Sincronizamos mediante el uso del método join.
         lt.join();
     }
 
     /**
      * Se encarga de gestionar la ejecución multihilo de la clase EscritorBinario.
      *
-     * @param f El archivo file que contiene la ruta donde se guardaran los datos.
+     * @param ficheroBin El archivo file que contiene la ruta donde se guardaran los datos.
      * @param autores El HashMap que contiene los datos de las autorias.
      * @param libros  El HashMap que contiene los datos de los libros.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
@@ -67,7 +67,7 @@ public class GestionaFicherosHilos implements Serializable{
     /**
      * Se encarga de gestionar la ejecución multihilo de la clase LectorBinario.
      *
-     * @param f El archivo file que contiene la ruta donde se guardaran los datos.
+     * @param ficheroBin El archivo file que contiene la ruta donde se guardaran los datos.
      * @param autores El HashMap que contiene los datos de las autorias.
      * @param libros  El HashMap que contiene los datos de los libros.
      * @throws InterruptedException En caso de que algún hilo quede interrumpido en la ejecución
@@ -75,6 +75,7 @@ public class GestionaFicherosHilos implements Serializable{
     public static void leerBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
         LectorBinario lb = new LectorBinario(ficheroBin,autores,libros);
         lb.start();
+        //Sincronizamos mediante el uso del método join.
         lb.join();
     }
 }

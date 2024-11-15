@@ -29,6 +29,126 @@ Neruda Basoalto
 10
 Agatha
 Christie Mallowan
+11
+Ernest
+Hemingway Miller
+12
+Jane
+Austen Knight
+13
+J.K.
+Rowling Gale
+14
+George
+Orwell Blair
+15
+Mark
+Twain Clemens
+16
+Leo
+Tolstoy Nikolaevich
+17
+Fyodor
+Dostoevsky Mikhailovich
+18
+Victor
+Hugo Léopold
+19
+Charles
+Dickens Harlow
+20
+Franz
+Kafka Fedorovich
+21
+Herman
+Melville Norris
+22
+J.R.R.
+Tolkien Ronald
+23
+Emily
+Bronte Bell
+24
+Virginia
+Woolf Stephen
+25
+Harper
+Lee Finch
+26
+John
+Steinbeck East
+27
+Arthur
+Conan Doyle
+28
+Mary
+Shelley Godwin
+29
+Ray
+Bradbury Douglas
+30
+Kurt
+Vonnegut Barnard
+31
+Gabriel
+García Márquez
+32
+Isabel
+Allende Llona
+33
+Carlos
+Ruiz Zafón
+34
+Julio
+Cortázar Morales
+35
+Mario
+Benedetti Alonso
+36
+Horacio
+Quiroga Fernández
+37
+Albert
+Camus Clamence
+38
+Jorge
+Amado Faria
+39
+Roberto
+Bolaño Ávalos
+40
+Alejandro
+Dumas Porthos
+41
+Margaret
+Atwood Blount
+42
+Doris
+Lessing Tayler
+43
+Orhan
+Pamuk Tanpınar
+44
+Kazuo
+Ishiguro Bennett
+45
+Patrick
+Modiano Nemirowsky
+46
+Umberto
+Eco Del Nobile
+47
+José
+Saramago Mota
+48
+Carlos
+Fuentes Macías
+49
+Luis
+Sepúlveda García
+50
+Juan
+Rulfo Vargas
 ***LIB***
 978014312
 La sombra del viento
@@ -60,3 +180,123 @@ Veinte poemas de amor
 978006207
 Diez negritos
 10
+978045152
+El viejo y el mar
+11
+978014143
+Orgullo y prejuicio
+12
+978074753
+Harry Potter y la piedra filosofal
+13
+9780451524935
+1984
+14
+9780142437230
+Las aventuras de Huckleberry Finn
+15
+9780451531117
+Anna Karenina
+16
+9780192833983
+Crimen y castigo
+17
+9780486452817
+Los miserables
+18
+9780143039433
+David Copperfield
+19
+9780804170155
+El proceso
+20
+9780142437179
+Moby-Dick
+21
+9780261103573
+El Señor de los Anillos
+22
+9780141439822
+Cumbres borrascosas
+23
+9780156949606
+La señora Dalloway
+24
+9780060935467
+Matar a un ruiseñor
+25
+9780142437285
+Las uvas de la ira
+26
+9780199555161
+Estudio en escarlata
+27
+9780143131847
+Frankenstein
+28
+9780006546061
+Fahrenheit 451
+29
+9780385314839
+Matadero cinco
+30
+9780307389938
+El otoño del patriarca
+31
+9781529032515
+El amante japonés
+32
+9788408172167
+Marina
+33
+9788432219484
+Bestiario
+34
+9788466350021
+La tregua
+35
+9788497596814
+Cuentos de la selva
+36
+9780141186887
+La peste
+37
+9788481090555
+Gabriela, clavo y canela
+38
+9788433933471
+2666
+39
+9788481302351
+El conde de Montecristo
+40
+9780099512240
+El cuento de la criada
+41
+9780060914059
+El cuaderno dorado
+42
+9780375708763
+Me llamo Rojo
+43
+9780571200733
+Los restos del día
+44
+9782070365538
+En el café de la juventud perdida
+45
+9788426415911
+El nombre de la rosa
+46
+9780156006330
+Ensayo sobre la ceguera
+47
+9788466353701
+La muerte de Artemio Cruz
+48
+9788489367022
+Un viejo que leía novelas de amor
+49
+9789681639502
+Pedro Páramo
+50

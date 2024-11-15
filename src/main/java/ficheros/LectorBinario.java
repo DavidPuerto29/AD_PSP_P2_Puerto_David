@@ -17,7 +17,7 @@ import java.util.HashMap;
  *@version 2.0
  */
 public class LectorBinario extends Thread{
-    private File ficheroBinario;
+    private final File ficheroBinario;
     private HashMap<Integer, Autoria> autores;
     private  HashMap <String, Libro> libros;
 
@@ -35,8 +35,8 @@ public class LectorBinario extends Thread{
     @Override
     public void run(){
         try {   //TEST
-            //Añadimos el metodo de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
-            synchronized (f) {
+            //Añadimos el método de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
+            synchronized (ficheroBinario) {
                 leerBin(ficheroBinario, autores, libros);
             }
         } catch (IOException e) {

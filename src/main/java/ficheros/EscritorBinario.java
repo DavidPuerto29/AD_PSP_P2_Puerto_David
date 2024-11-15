@@ -17,7 +17,7 @@ import java.util.HashMap;
  *@version 2.0
  */
 public class EscritorBinario extends Thread{
-    private File ficheroBin;
+    private final File ficheroBin;
     private HashMap<Integer, Autoria> autores;
     private HashMap <String, Libro> libros;
 
@@ -36,7 +36,7 @@ public class EscritorBinario extends Thread{
     public void run(){
         try {
             //Añadimos el metodo de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
-            synchronized (f) {
+            synchronized (ficheroBin) {
                 guardarBin(autores, libros, ficheroBin);
             }
         } catch (IOException e) {

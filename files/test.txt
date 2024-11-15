@@ -1,8 +1,0 @@
-***AUT***
-1
-manolo
-paco gomez
-2
-luis
-gomez
-***LIB***

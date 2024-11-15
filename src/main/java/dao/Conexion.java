@@ -23,9 +23,8 @@ public class Conexion {
      */
     protected static Connection conectar() throws SQLException {
         String user = "root";
-        String passCasa = "root";
-        String url = "jdbc:mysql://localhost:3306/biblioteca?useSSL=false";
         String passInsti = "Sandia4you";
+        String url = "jdbc:mysql://localhost:3306/biblioteca?useSSL=false";
         return DriverManager.getConnection(url, user ,passInsti);
     }
 

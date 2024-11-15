@@ -4,8 +4,6 @@ import biblioteca.Libro;
 import ficheros.GestionaFicherosHilos;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -20,10 +18,10 @@ import static ficheros.GestionaFicherosHilos.*;
 /**
  * Clase que representa a un programa de gestión de biblioteca gestionando los autores y los libros
  * registrados en su HashMap correspondiente misma además contando de exportación/importación a ficheros
- * y a ficheros binarios, aquí se encuentra el main del programa y sus correspondientes metodos estáticos.
+ * y a ficheros binarios, aquí se encuentra el main del programa y sus correspondientes métodos estáticos.
  *
  * Cuentas con un archivo de texto llamado prefab en la carpeta files del proyecto que incluye un ejemplo de
- * biblioteca con 10 instancias de autores con sus respectivos 10 libros.
+ * biblioteca con 50 instancias de autores con sus respectivos 50 libros.
  *
  * @author David Puerto Cuenca
  * @version 2.0
@@ -35,7 +33,7 @@ public class Biblioteca implements Serializable {
      */
     private static HashMap <String, Libro> libros = new HashMap<>();
     private static HashMap <Integer, Autoria> autores = new HashMap<>();
-    private static int instancias = -1;
+    private static int instancias = 0;
 
     /**
      * En el método main primero se intenta leer el fichero binario para importar datos
@@ -57,7 +55,7 @@ public class Biblioteca implements Serializable {
 
         System.out.println("Bienvenido al gestor de biblioteca");
 
-            //Creamos las tablas sql de la base de datos.
+            //Creamos las tablas sql de la base de datos en caso de que no existan.
             createTables();
             //Leemos las tablas sql de autorias y de libros.
             //Importante primero leer los autores, ya que si no los libros al no tener idAutor puede crear conflictos.
@@ -120,8 +118,9 @@ public class Biblioteca implements Serializable {
                         try {
                             leerBin(Biblioteca.autores, Biblioteca.libros);
                             //Introducimos los nuevos datos en la base de datos.
-                            crearActualizarAutorias(autores);
-                            crearActualizarLibros(libros);
+                            instancias = crearActualizarAutorias(autores);
+                            instancias += crearActualizarLibros(libros);
+                            System.out.println("Archivo importado correctamente, filas sql afectadas: "+instancias);
                         }catch (InterruptedException e) {
                             System.out.println("Hilo interrumpido en la ejecución");
                         }

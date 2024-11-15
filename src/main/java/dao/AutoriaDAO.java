@@ -1,6 +1,7 @@
 package dao;
 
 import biblioteca.Autoria;
+import biblioteca.Libro;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static dao.LibroDao.leerTodosLibros;
 
 /**
  * Esta clase se encarga de gestionar los métodos sql de la clase
@@ -96,16 +99,19 @@ public class AutoriaDAO {
      * Este método se encarga de eliminar en la tabla sql
      * la autoria envidada por parámetro.
      *
+     * Hay que tener cuidado con que autorias se eliminan
+     * ya que los libros están relacionados con la id de autor
+     * entonces si se elimina un autor sin eliminar también sus libros
+     * puede haber conflictos.
+     *
      * @return Devuelve el número de filas de la tabla afectadas.
      */
-    public static int eliminarAutoria(int id){ //ACABAR
+    public static int eliminarAutoria(int id){
         String sql = "delete from autorias where id = ?";
-
         try(Connection con = Conexion.conectar()){
             PreparedStatement p = con.prepareStatement(sql);
             p.setInt(1, id );
             instancias = p.executeUpdate();
-            //HAY Q ELIMINAR LOS LIBROS CORRESPONDIENTES A ESA AUTORIA TMB
         } catch (SQLException e) {
             System.out.println("Error al conectarse a la base de datos.");
         }
