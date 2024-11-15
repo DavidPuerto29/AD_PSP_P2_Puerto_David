@@ -35,7 +35,10 @@ public class EscritorBinario extends Thread{
     @Override
     public void run(){
         try {
-            guardarBin(autores,libros,ficheroBin);
+            //Añadimos el metodo de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
+            synchronized (f) {
+                guardarBin(autores, libros, ficheroBin);
+            }
         } catch (IOException e) {
             System.out.println("Error de entrada/salida al intentar guardar el fichero binario.");
         }

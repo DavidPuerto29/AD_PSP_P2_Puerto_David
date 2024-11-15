@@ -52,7 +52,7 @@ public class Biblioteca implements Serializable {
      * V2.0 Se añade el uso de sentencias sql y todos los datos del programa son guardados en ella.
      *
      */
-    public static void main(String[] args) {    //Gestionar excepciones
+    public static void main(String[] args) {
         boolean bucle = true;
 
         System.out.println("Bienvenido al gestor de biblioteca");

@@ -35,8 +35,11 @@ public class LectorBinario extends Thread{
     @Override
     public void run(){
         try {   //TEST
-            leerBin(ficheroBinario,autores,libros);
-        } catch (IOException e) { //TEST
+            //Añadimos el metodo de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
+            synchronized (f) {
+                leerBin(ficheroBinario, autores, libros);
+            }
+        } catch (IOException e) {
             System.out.println("No hay un fichero binario guardado, por favor cree uno primero.");
         }catch (ClassNotFoundException e) {
             System.out.println("La clase deseada no ha sido encontrada.");

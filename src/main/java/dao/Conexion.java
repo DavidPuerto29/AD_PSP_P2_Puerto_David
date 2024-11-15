@@ -33,6 +33,8 @@ public class Conexion {
      * Este método se encarga de crear las tablas sql de autoria y libros del
      * programa para su correcta gestión, en caso de existir las tablas no se
      * crearán como asi indica la sentencia de sql.
+     *
+     * @throws SQLException Puede lanzar una excepción sql.
      */
     public static void createTables(){
         String sqlAu ="create table if not exists autorias"+

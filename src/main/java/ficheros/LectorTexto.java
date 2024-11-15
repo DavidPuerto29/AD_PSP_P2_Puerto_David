@@ -35,7 +35,10 @@ public class LectorTexto extends Thread{
     @Override
     public void run(){
         try {
-            importarFicheros(f,autores,libros);
+            //Añadimos el metodo de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
+            synchronized (f) {
+                importarFicheros(f, autores, libros);
+            }
         } catch (IOException e) {
             System.out.println("Error de entrada/salida al intentar importar los datos de un fichero.");
         }

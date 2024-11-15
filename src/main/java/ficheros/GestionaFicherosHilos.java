@@ -35,7 +35,6 @@ public class GestionaFicherosHilos implements Serializable{
         EscritorTexto es = new EscritorTexto(f,autores,libros,append);
         System.out.println("hola");
         es.start();
-        es.join();
     }
 
     /**
@@ -63,7 +62,6 @@ public class GestionaFicherosHilos implements Serializable{
     public static void guardarBin(HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros) throws InterruptedException {
         EscritorBinario eb = new EscritorBinario(ficheroBin,autores,libros);
         eb.start();
-        eb.join();
     }
 
     /**

@@ -35,7 +35,10 @@ public class EscritorTexto extends Thread{
     @Override
     public void run(){
         try {
-            exportarFichero(f,autores,libros,append);
+            //Añadimos el metodo de sincronización, ya que varios hilos no puede acceder a un fichero a la vez.
+            synchronized (f) {
+                exportarFichero(f, autores, libros, append);
+            }
         } catch (IOException e) {
             System.out.println("Error de entrada/salida al intentar exportar el fichero.");
         }
@@ -63,7 +66,7 @@ public class EscritorTexto extends Thread{
     private static void exportarFichero(File f, HashMap<Integer, Autoria> autores, HashMap <String, Libro> libros,boolean append) throws IOException {
         Autoria a = null;
         Libro libroCopia = null;
-        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f)));
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f,append)));
         //Escritura de autores en el fichero
         pw.println("***AUT***");
         for (int i = 1; i <= autores.size(); ++i) {

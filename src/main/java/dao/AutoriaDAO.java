@@ -1,7 +1,6 @@
 package dao;
 
 import biblioteca.Autoria;
-import biblioteca.Libro;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
